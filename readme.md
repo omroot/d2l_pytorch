@@ -1,8 +1,11 @@
-# Deep Generative Modeling 
+# Dive into Deep Learning 
 
 Author: Oualid Missaoui 
+Scope: Studying the textbook 
 
 
 ## Overview 
 
-This repo implements the major deep generative modeling techniques 
+In this repos I study the Dive into Deep Learning textbook using PyTorch. 
+
+I particularly attempt to clarify ambiguous mathematical derivations, answer the questions to the best of my ability, and restructure the code into a package to enhance readeability and facilitate potential extensions.
