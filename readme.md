@@ -1,7 +1,8 @@
 # Dive into Deep Learning 
 
 Author: Oualid Missaoui 
-Scope: Studying the textbook 
+
+Scope: Studying the textbook https://d2l.ai/index.html
 
 
 ## Overview 
