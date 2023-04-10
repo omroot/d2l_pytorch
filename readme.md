@@ -30,3 +30,8 @@ https://github.com/omroot/d2l_pytorch/tree/main/mylearnings/myd2l/notebooks/refa
 that uses the refactored code under
 
 https://github.com/omroot/d2l_pytorch/tree/main/mylearnings/myd2l/omd2l
+
+
+In addition, I add lecture notes to clarify some concepts I thought were not detailed enough especially mathematical derivations: 
+
+https://github.com/omroot/d2l_pytorch/tree/main/mylearnings/mylecturenotes
