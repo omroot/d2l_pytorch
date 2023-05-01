@@ -44,13 +44,12 @@ from torchvision import transforms
 
 from omd2l.models.base.Classifier import Classifier
 from omd2l.models.optimizer.SGD import SGD
+from omd2l.models.utils import init_cnn
 import omd2l.utils.compute  as compute
-def init_cnn(module):  #@save
-    """Initialize weights for CNNs."""
-    if type(module) == nn.Linear or type(module) == nn.Conv2d:
-        nn.init.xavier_uniform_(module.weight)
 
-class LeNet(d2l.Classifier):  #@save
+
+
+class LeNet(Classifier):  #@save
     """The LeNet-5 model."""
     def __init__(self, lr=0.1, num_classes=10):
         super().__init__()

@@ -43,6 +43,8 @@ from torchvision import transforms
 from omd2l.models.base.Classifier import Classifier
 from omd2l.models.optimizer.SGD import SGD
 import omd2l.utils.compute  as compute
+from omd2l.models.utils import init_cnn
+
 
 class Residual(nn.Module):  #@save
     """The Residual block of ResNet models."""
@@ -67,7 +69,7 @@ class Residual(nn.Module):  #@save
         Y += X
         return F.relu(Y)
 
-class ResNet(d2l.Classifier):
+class ResNet(Classifier):
 
 
     def __init__(self, arch, lr=0.1, num_classes=10):
@@ -79,7 +81,7 @@ class ResNet(d2l.Classifier):
         self.net.add_module('last', nn.Sequential(
             nn.AdaptiveAvgPool2d((1, 1)), nn.Flatten(),
             nn.LazyLinear(num_classes)))
-        self.net.apply(d2l.init_cnn)
+        self.net.apply(init_cnn)
 
     def b1(self):
         return nn.Sequential(

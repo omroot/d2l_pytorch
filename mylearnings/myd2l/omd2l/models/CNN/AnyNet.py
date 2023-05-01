@@ -44,9 +44,10 @@ from torchvision import transforms
 from omd2l.models.base.Classifier import Classifier
 from omd2l.models.optimizer.SGD import SGD
 import omd2l.utils.compute  as compute
+from omd2l.models.utils import init_cnn
+from omd2l.models.CNN.ResNet import ResNeXtBlock
 
-
-class AnyNet(d2l.Classifier):
+class AnyNet(Classifier):
 
 
 
@@ -59,16 +60,16 @@ class AnyNet(d2l.Classifier):
         self.net.add_module('head', nn.Sequential(
             nn.AdaptiveAvgPool2d((1, 1)), nn.Flatten(),
             nn.LazyLinear(num_classes)))
-        self.net.apply(d2l.init_cnn)
+        self.net.apply(init_cnn)
 
     def stage(self, depth, num_channels, groups, bot_mul):
         blk = []
         for i in range(depth):
             if i == 0:
-                blk.append(d2l.ResNeXtBlock(num_channels, groups, bot_mul,
+                blk.append(ResNeXtBlock(num_channels, groups, bot_mul,
                                             use_1x1conv=True, strides=2))
             else:
-                blk.append(d2l.ResNeXtBlock(num_channels, groups, bot_mul))
+                blk.append(ResNeXtBlock(num_channels, groups, bot_mul))
         return nn.Sequential(*blk)
 
     def stem(self, num_channels):

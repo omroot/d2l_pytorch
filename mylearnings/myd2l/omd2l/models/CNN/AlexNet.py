@@ -43,8 +43,9 @@ from torchvision import transforms
 from omd2l.models.base.Classifier import Classifier
 from omd2l.models.optimizer.SGD import SGD
 import omd2l.utils.compute  as compute
+from omd2l.models.utils import init_cnn
 
-class AlexNet(d2l.Classifier):
+class AlexNet(Classifier):
     def __init__(self, lr=0.1, num_classes=10):
         super().__init__()
         self.save_hyperparameters()
@@ -60,4 +61,4 @@ class AlexNet(d2l.Classifier):
             nn.LazyLinear(4096), nn.ReLU(), nn.Dropout(p=0.5),
             nn.LazyLinear(4096), nn.ReLU(),nn.Dropout(p=0.5),
             nn.LazyLinear(num_classes))
-        self.net.apply(d2l.init_cnn)
+        self.net.apply(init_cnn)

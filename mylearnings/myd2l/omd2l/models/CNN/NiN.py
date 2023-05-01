@@ -44,6 +44,7 @@ from torchvision import transforms
 from omd2l.models.base.Classifier import Classifier
 from omd2l.models.optimizer.SGD import SGD
 import omd2l.utils.compute  as compute
+from omd2l.models.utils import init_cnn
 
 
 def nin_block(out_channels, kernel_size, strides, padding):
@@ -52,10 +53,7 @@ def nin_block(out_channels, kernel_size, strides, padding):
         nn.LazyConv2d(out_channels, kernel_size=1), nn.ReLU(),
         nn.LazyConv2d(out_channels, kernel_size=1), nn.ReLU())
 
-
-
-
-class NiN(d2l.Classifier):
+class NiN(Classifier):
     def __init__(self, lr=0.1, num_classes=10):
         super().__init__()
         self.save_hyperparameters()
@@ -70,4 +68,4 @@ class NiN(d2l.Classifier):
             nin_block(num_classes, kernel_size=3, strides=1, padding=1),
             nn.AdaptiveAvgPool2d((1, 1)),
             nn.Flatten())
-        self.net.apply(d2l.init_cnn)
+        self.net.apply(init_cnn)

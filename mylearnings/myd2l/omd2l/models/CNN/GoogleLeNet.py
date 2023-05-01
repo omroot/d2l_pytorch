@@ -44,6 +44,7 @@ from torchvision import transforms
 from omd2l.models.base.Classifier import Classifier
 from omd2l.models.optimizer.SGD import SGD
 import omd2l.utils.compute  as compute
+from omd2l.models.utils import init_cnn
 
 
 class Inception(nn.Module):
@@ -79,7 +80,7 @@ class GoogleNet(Classifier):
         self.save_hyperparameters()
         self.net = nn.Sequential(self.b1(), self.b2(), self.b3(), self.b4(),
                                  self.b5(), nn.LazyLinear(num_classes))
-        self.net.apply(d2l.init_cnn)
+        self.net.apply(init_cnn)
 
 
     def b1(self):
