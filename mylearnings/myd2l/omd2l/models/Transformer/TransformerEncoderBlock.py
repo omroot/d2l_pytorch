@@ -12,11 +12,17 @@ from omd2l.models.AttentionSeq2Seq.MultiHeadAttention import MultiHeadAttention
 
 class TransformerEncoderBlock(nn.Module):  #@save
     """The Transformer encoder block."""
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout,
+    def __init__(self,
+                 num_hiddens,
+                 ffn_num_hiddens,
+                 num_heads,
+                 dropout,
                  use_bias=False):
         super().__init__()
-        self.attention = MultiHeadAttention(num_hiddens, num_heads,
-                                                dropout, use_bias)
+        self.attention = MultiHeadAttention(num_hiddens,
+                                            num_heads,
+                                            dropout,
+                                            use_bias)
         self.addnorm1 = AddNorm(num_hiddens, dropout)
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
         self.addnorm2 = AddNorm(num_hiddens, dropout)

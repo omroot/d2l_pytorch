@@ -23,8 +23,8 @@ class TransformerEncoder(Encoder):  #@save
         self.pos_encoding = PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
         for i in range(num_blks):
-            self.blks.add_module("block"+str(i), TransformerEncoderBlock(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias))
+            self.blks.add_module("block"+str(i),
+                                 TransformerEncoderBlock(num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias))
 
     def forward(self, X, valid_lens):
         # Since positional encoding values are between -1 and 1, the embedding

@@ -18,8 +18,8 @@ class TransformerDecoder(AttentionDecoder):
         self.pos_encoding = PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
         for i in range(num_blks):
-            self.blks.add_module("block"+str(i), TransformerDecoderBlock(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, i))
+            self.blks.add_module("block"+str(i),
+                                 TransformerDecoderBlock(num_hiddens, ffn_num_hiddens, num_heads, dropout, i))
         self.dense = nn.LazyLinear(vocab_size)
 
     def init_state(self, enc_outputs, enc_valid_lens):
@@ -31,11 +31,9 @@ class TransformerDecoder(AttentionDecoder):
         for i, blk in enumerate(self.blks):
             X, state = blk(X, state)
             # Decoder self-attention weights
-            self._attention_weights[0][
-                i] = blk.attention1.attention.attention_weights
+            self._attention_weights[0][i] = blk.attention1.attention.attention_weights
             # Encoder-decoder attention weights
-            self._attention_weights[1][
-                i] = blk.attention2.attention.attention_weights
+            self._attention_weights[1][i] = blk.attention2.attention.attention_weights
         return self.dense(X), state
 
     @property
