@@ -44,10 +44,6 @@ from torchvision import transforms
 
 from omd2l.models.base.HyperParameters import HyperParameters
 from omd2l.utils.display import show_images
-
-
-
-
 from omd2l.data.DataModule import DataModule
 
 class FashionMNIST(DataModule):
