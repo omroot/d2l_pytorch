@@ -42,7 +42,7 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision import transforms
 
-from omd2l.models.base.Classifier import Regressor
+from omd2l.models.base.Regressor import Regressor
 from omd2l.models.optimizer.SGD import SGD
 import omd2l.utils.compute  as compute
 

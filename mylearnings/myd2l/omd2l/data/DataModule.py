@@ -61,6 +61,7 @@ class DataModule(HyperParameters):
         """Defined in :numref:`sec_synthetic-regression-data`"""
         tensors = tuple(a[indices] for a in tensors)
         dataset = torch.utils.data.TensorDataset(*tensors)
-        return torch.utils.data.DataLoader(dataset, self.batch_size,
+        return torch.utils.data.DataLoader(dataset,
+                                           self.batch_size,
                                            shuffle=train)
 
