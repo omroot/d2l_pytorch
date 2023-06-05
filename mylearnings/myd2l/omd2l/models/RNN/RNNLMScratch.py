@@ -44,6 +44,7 @@ from torchvision import transforms
 
 
 from omd2l.models.base.Classifier import Classifier
+from omd2l.models.RNN import RNN
 import omd2l.utils.compute  as compute
 
 
@@ -52,7 +53,10 @@ import omd2l.utils.compute  as compute
 
 class RNNLMScratch(Classifier):
     """Defined in :numref:`sec_rnn-scratch`"""
-    def __init__(self, rnn, vocab_size, lr=0.01):
+    def __init__(self, 
+                 rnn: RNN,
+                 vocab_size: int,
+                 lr: float=0.01):
         super().__init__()
         self.save_hyperparameters()
         self.init_params()
