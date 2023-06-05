@@ -43,13 +43,9 @@ from torchvision import transforms
 
 class HyperParameters:
     def save_hyperparameters(self, ignore=[]):
-        """Defined in :numref:`sec_oo-design`"""
-        raise NotImplemented
-
-    def save_hyperparameters(self, ignore=[]):
         """Save function arguments into class attributes.
 
-        Defined in :numref:`sec_utils`"""
+        """
         frame = inspect.currentframe().f_back
         _, _, _, local_vars = inspect.getargvalues(frame)
         self.hparams = {k :v for k, v in local_vars.items()

@@ -40,8 +40,8 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision import transforms
 
-from omd2l.models.base.HyperParameters import HyperParameters
-from omd2l.utils.display import ProgressBoard
+from omd2l.models.base import HyperParameters
+from omd2l.models.base import ProgressBoard
 import omd2l.utils.compute  as compute
 
 class Decoder(nn.Module):  #@save

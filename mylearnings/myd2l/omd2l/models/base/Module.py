@@ -40,16 +40,28 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision import transforms
 
-from omd2l.models.base.HyperParameters import HyperParameters
-from omd2l.utils.display import ProgressBoard
+from omd2l.models.base import HyperParameters
+from omd2l.models.base import ProgressBoard
 import omd2l.utils.compute  as compute
 
-class Module(nn_Module, HyperParameters):
-    """Defined in :numref:`sec_oo-design`"""
-    def __init__(self, plot_train_per_epoch=2, plot_valid_per_epoch=1):
+class Module(nn.Module, HyperParameters):
+
+    def __init__(self,
+                 plot_train_per_epoch=2,
+                 plot_valid_per_epoch=1):
         super().__init__()
         self.save_hyperparameters()
         self.board = ProgressBoard()
+
+    def configure_optimizers(self):
+        """Defined in :numref:`sec_classification`"""
+        return torch.optim.SGD(self.parameters(), lr=self.lr)
+
+    def apply_init(self, inputs, init=None):
+        """Defined in :numref:`sec_lazy_init`"""
+        self.forward(*inputs)
+        if init is not None:
+            self.net.apply(init)
     def loss(self, y_hat, y):
         raise NotImplementedError
 
@@ -74,23 +86,16 @@ class Module(nn_Module, HyperParameters):
                         ('train_' if train else 'val_') + key,
                         every_n=int(n))
     def training_step(self, batch):
+        """Accepts a data batch to return the loss value
+        """
         l = self.loss(self(*batch[:-1]), batch[-1])
         self.plot('loss', l, train=True)
         return l
 
     def validation_step(self, batch):
+        """ Report the evaluation measures
+        """
         l = self.loss(self(*batch[:-1]), batch[-1])
         self.plot('loss', l, train=False)
 
-    def configure_optimizers(self):
-        raise NotImplementedError
 
-    def configure_optimizers(self):
-        """Defined in :numref:`sec_classification`"""
-        return torch.optim.SGD(self.parameters(), lr=self.lr)
-
-    def apply_init(self, inputs, init=None):
-        """Defined in :numref:`sec_lazy_init`"""
-        self.forward(*inputs)
-        if init is not None:
-            self.net.apply(init)

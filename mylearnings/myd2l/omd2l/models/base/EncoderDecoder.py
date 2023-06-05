@@ -40,7 +40,7 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision import transforms
 
-from omd2l.models.base.Classifier import Classifier
+from omd2l.models.base import Classifier
 
 class EncoderDecoder(Classifier):  #@save
     """The base class for the encoder-decoder architecture."""

@@ -41,7 +41,7 @@ from torch.nn import functional as F
 from torchvision import transforms
 
 
-from omd2l.models.base.Module import Module
+from omd2l.models.base import Module
 from omd2l.models.optimizer.SGD import SGD
 import omd2l.utils.compute  as compute
 

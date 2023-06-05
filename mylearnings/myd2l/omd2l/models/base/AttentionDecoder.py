@@ -42,7 +42,7 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision import transforms
 
-from omd2l.models.base.Decoder  import Decoder
+from omd2l.models.base  import Decoder
 
 
 
