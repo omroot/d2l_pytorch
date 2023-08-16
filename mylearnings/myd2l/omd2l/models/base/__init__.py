@@ -7,3 +7,4 @@ from .Encoder import Encoder
 from .Decoder import Decoder
 from .EncoderDecoder import EncoderDecoder
 from .Trainer import Trainer
+from . AttentionDecoder import AttentionDecoder
