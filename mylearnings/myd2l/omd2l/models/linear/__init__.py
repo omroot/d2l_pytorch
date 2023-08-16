@@ -1,0 +1,4 @@
+from .LinearRegression import LinearRegression
+from .LinearRegressionScratch import LinearRegressionScratch
+from .SoftmaxRegression import *
+from .SoftmaxRegressionScratch import SoftmaxRegressionScratch
