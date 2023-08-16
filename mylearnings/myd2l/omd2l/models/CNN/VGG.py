@@ -64,9 +64,14 @@ class VGG(Classifier):
         for (num_convs, out_channels) in arch:
             conv_blks.append(vgg_block(num_convs, out_channels))
         self.net = nn.Sequential(
-            *conv_blks, nn.Flatten(),
-            nn.LazyLinear(4096), nn.ReLU(), nn.Dropout(0.5),
-            nn.LazyLinear(4096), nn.ReLU(), nn.Dropout(0.5),
+            *conv_blks,
+            nn.Flatten(),
+            nn.LazyLinear(4096),
+            nn.ReLU(),
+            nn.Dropout(0.5),
+            nn.LazyLinear(4096),
+            nn.ReLU(),
+            nn.Dropout(0.5),
             nn.LazyLinear(num_classes))
         self.net.apply(init_cnn)
 

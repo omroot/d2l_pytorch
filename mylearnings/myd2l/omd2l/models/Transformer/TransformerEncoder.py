@@ -2,21 +2,24 @@
 
 
 import math
-import pandas as pd
-import torch
 from torch import nn
 
 
-from omd2l.models.base.Encoder  import Encoder
-from omd2l.models.AttentionSeq2Seq.PositionalEncoding import PositionalEncoding
+from omd2l.models.base  import Encoder
+from omd2l.models.Transformer import PositionalEncoding
+from omd2l.models.Transformer import TransformerEncoderBlock
 
-from omd2l.models.Transformer.TransformerEncoderBlock import TransformerEncoderBlock
 
-
-class TransformerEncoder(Encoder):  #@save
+class TransformerEncoder(Encoder):
     """The Transformer encoder."""
-    def __init__(self, vocab_size, num_hiddens, ffn_num_hiddens,
-                 num_heads, num_blks, dropout, use_bias=False):
+    def __init__(self,
+                 vocab_size,
+                 num_hiddens,
+                 ffn_num_hiddens,
+                 num_heads,
+                 num_blks,
+                 dropout,
+                 use_bias=False):
         super().__init__()
         self.num_hiddens = num_hiddens
         self.embedding = nn.Embedding(vocab_size, num_hiddens)
@@ -24,7 +27,11 @@ class TransformerEncoder(Encoder):  #@save
         self.blks = nn.Sequential()
         for i in range(num_blks):
             self.blks.add_module("block"+str(i),
-                                 TransformerEncoderBlock(num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias))
+                                 TransformerEncoderBlock(num_hiddens=num_hiddens,
+                                                         ffn_num_hiddens=ffn_num_hiddens,
+                                                         num_heads=num_heads,
+                                                         dropout=dropout,
+                                                         use_bias=use_bias))
 
     def forward(self, X, valid_lens):
         # Since positional encoding values are between -1 and 1, the embedding

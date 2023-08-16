@@ -1,13 +1,8 @@
 
 
-import math
-import pandas as pd
-import torch
 from torch import nn
 
-
-
-class AddNorm(nn.Module):  #@save
+class AddNorm(nn.Module):
     """The residual connection followed by layer normalization."""
     def __init__(self, norm_shape, dropout):
         super().__init__()

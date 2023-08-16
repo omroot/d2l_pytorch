@@ -1,13 +1,12 @@
 
 
-import math
-import pandas as pd
+
 import torch
 from torch import nn
 
-from omd2l.models.Transformer.AddNorm import AddNorm
-from omd2l.models.Transformer.PositionWiseFFN import PositionWiseFFN
-from omd2l.models.AttentionSeq2Seq.MultiHeadAttention import MultiHeadAttention
+from omd2l.models.Transformer import AddNorm
+from omd2l.models.Transformer import PositionWiseFFN
+from omd2l.models.Transformer import MultiHeadAttention
 
 
 class TransformerDecoderBlock(nn.Module):

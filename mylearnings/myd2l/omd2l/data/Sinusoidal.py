@@ -1,14 +1,6 @@
-import collections
-import random
-import re
+
 import torch
-
-
 from omd2l.data.DataModule import DataModule
-from omd2l.utils.io_utils import download
-from omd2l.nlp.Vocab import Vocab
-import omd2l.config as cfg
-
 
 class SinusoidalData(DataModule):
     def __init__(self, batch_size=16, T=1000, num_train=600, tau=4):

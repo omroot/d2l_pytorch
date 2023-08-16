@@ -1,16 +1,13 @@
+
 import math
-import pandas as pd
-import torch
 from torch import nn
 
-from omd2l.models.base.AttentionDecoder import AttentionDecoder
-from omd2l.models.AttentionSeq2Seq.PositionalEncoding import PositionalEncoding
-from omd2l.models.Transformer.TransformerDecoderBlock import TransformerDecoderBlock
+from omd2l.models.base import AttentionDecoder
+from omd2l.models.Transformer import PositionalEncoding
+from omd2l.models.Transformer import TransformerDecoderBlock
 
-
-class TransformerDecoder(AttentionDecoder):
-    def __init__(self, vocab_size, num_hiddens, ffn_num_hiddens, num_heads,
-                 num_blks, dropout):
+class TransformerDecoder (AttentionDecoder):
+    def __init__(self, vocab_size, num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout):
         super().__init__()
         self.num_hiddens = num_hiddens
         self.num_blks = num_blks
