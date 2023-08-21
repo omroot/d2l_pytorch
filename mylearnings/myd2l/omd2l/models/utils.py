@@ -1,11 +1,15 @@
 
 
-import math
-import pandas as pd
 import torch
 from torch import nn
 
-def init_seq2seq(module):  #@save
+
+def init_cnn(module):
+    """Initialize weights for CNNs."""
+    if type(module) == nn.Linear or type(module) == nn.Conv2d:
+        nn.init.xavier_uniform_(module.weight)
+
+def init_seq2seq(module):
     """Initialize weights for Seq2Seq."""
     if type(module) == nn.Linear:
          nn.init.xavier_uniform_(module.weight)
@@ -14,7 +18,7 @@ def init_seq2seq(module):  #@save
             if "weight" in param:
                 nn.init.xavier_uniform_(module._parameters[param])
 
-def masked_softmax(X, valid_lens):  #@save
+def masked_softmax(X, valid_lens):
     """Perform softmax operation by masking elements on the last axis."""
     # X: 3D tensor, valid_lens: 1D or 2D tensor
     def _sequence_mask(X, valid_len, value=0):
